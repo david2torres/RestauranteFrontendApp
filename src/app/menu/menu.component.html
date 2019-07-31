@@ -1,0 +1,46 @@
+<div class="card border-primary mb-3">
+  <div class="card-header">MENU</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado Menu</h5>
+
+    <div class="my-2 text-left">
+      <button class="btn bt-rounded btn-primary" Type="button" [routerLink]="['/menu/form']"> Crear Menu</button>
+    </div>
+
+    <div *ngIf="menu?.length==0" class="alert alert-info" >
+        No hay Registros en La base de Datos
+    </div>
+    <table class="table table-bordered table-striped" *ngIf="menu?.length>0">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Tipo de Menu</th>
+          <th>Nombre Menu</th>
+          <th>Ingredientes</th>
+          <th>Precio </th>
+          <th>
+            editar
+          </th>
+          <th>
+            eliminar
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr *ngFor="let menu of menu">
+              <td>{{ menu.id }}</td>
+              <td>{{ menu.tipoMenu}}</td>
+              <td>{{ menu.nombreMenu}}</td>
+              <td>{{ menu.ingredientes}}</td>
+              <td>{{ menu.precio}}</td>
+              <td>
+                <button type="button" name="editar" [routerLink]="['/menu/form/', menu.id]" class="btn btn-outline-primary"><img src="assets/img/edit.png"/></button>
+              </td>
+              <td>
+                <button type="button" name="eliminar" (click)='delete(menu)' class="btn btn-outline-danger"><img src="assets/img/borrar.png"/></button>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+    </div>
+</div>

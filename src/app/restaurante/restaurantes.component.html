@@ -1,0 +1,75 @@
+<div class="card border-primary mb-3">
+  <div class="card-header">RESTAURANTES</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado Restaurantes</h5>
+
+    <div class="my-2 text-left">
+      <button class="btn bt-rounded btn-primary" Type="button" [routerLink]="['/restaurante/form']"> Crear Restaurante</button>
+    </div>
+    <div *ngIf="restaurante?.length==0" class="alert alert-info" >
+        No hay Registros en La base de Datos
+    </div>
+    <table class="table table-bordered table-striped" *ngIf="restaurante?.length>0">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Razon Social S.A.S</th>
+          <th>Nombre Comercial</th>
+          <th>Tipo de Restaurante</th>
+          <th>Menu: Entrada</th>
+          <th>Principal y Bebidas</th>
+          <th>Postres</th>
+          <th> Editar </th>
+          <th> Eliminar </th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr *ngFor="let restaurante of restaurante">
+              <td>{{ restaurante.id}}</td>
+              <td>{{ restaurante.razonSocial}}</td>
+              <td>{{ restaurante.nombreComercial}}</td>
+              <td>{{ restaurante.tipoRestaurante}}</td>
+
+              <td>
+                <div class="input-group mb-3">
+                  <select class="custom-select" id="inputGroupSelect01">
+                    <option selected>Lechuga</option>
+                    <option value="1">Tomate</option>
+                    <option value="2">Cebolla</option>
+                    <option value="3">Zanahoria</option>
+                  </select>
+                </div>
+              </td>
+
+              <td>
+                <div class="input-group mb-3">
+                  <select class="custom-select" id="inputGroupSelect01">
+                    <option selected>Ensalada</option>
+                    <option value="1">Hojas Salteadas</option>
+                    <option value="2">Plato cesar</option>
+                    <option value="3">Arboles G,</option>
+                  </select>
+                </div>
+              </td>
+
+              <td>
+                <div class="input-group mb-3">
+                  <select class="custom-select" id="inputGroupSelect01">
+                    <option selected>Agua</option>
+                    <option value="1">Jugo limon</option>
+                    <option value="2">Jugo Fresa</option>
+                    <option value="3">Jugo Mango</option>
+                  </select>
+                </div>
+              </td>
+              <td>
+                <button class="btn btn-outline-primary" type="button"[routerLink]=" ['/restaurante/form/', restaurante.id]"><img src="assets/img/edit.png"/></button>
+              </td>
+              <td>
+                <button class="btn btn-outline-danger" type="button"  name="eliminar" (click)='delete(restaurante)'><img src="assets/img/borrar.png"/></button>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+    </div>
+</div>

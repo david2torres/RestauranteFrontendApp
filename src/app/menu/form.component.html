@@ -1,0 +1,71 @@
+<div class="card bg-dark text-white">
+  <div class="card-header">{{ titulo }}</div>
+  <div class="card-body">
+
+    <form #menuForm="ngForm">
+
+      <div class="form-group row">
+        <label for="tipomenu" class="col-form-label col-sm-2">Tipo Menu</label>
+        <div class="col-sm-6">
+          <select id="tipoMenu" [(ngModel)]="menu.tipoMenu" class="col-form-label col-sm-12" name="tipoMenu" required #tipomenu="ngModel">
+            <option>Entrada </option>
+            <option>Plato Fuerte</option>
+            <option>Postres </option>
+            <option>Bebidas</option>
+          </select>
+          <div class="alert alert-danger" *ngIf="tipomenu.invalid && (tipomenu.dirty || tipomenu.touhed)" >
+            <div *ngIf="tipomenu.errors.required">
+              Tipo Menu Obligatorio
+            </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="nombreMenu" class="col-form-label col-sm-2">Nombre Menu</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="menu.nombreMenu" name="nombreMenu" required #nombreMenu="ngModel" placeholder="Nombre del Menu">
+          <div class="alert alert-danger" *ngIf="nombreMenu.invalid && (nombreMenu.dirty || nombreMenu.touhed)">
+            <div *ngIf="nombreMenu.errors.required">
+              Nombre Menu Obligatorio
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="ingredientes" class="col-form-label col-sm-2">Ingredientes</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="menu.ingredientes" name="ingredientes" required #ingredientes="ngModel" placeholder="Ingredientes">
+          <div class="alert alert-danger" *ngIf="ingredientes.invalid && (ingredientes.dirty || ingredientes.touhed)" >
+            <div *ngIf="ingredientes.errors.required">
+              Ingredientes Obligatorio
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="precio" class="col-form-label col-sm-2">Precio</label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" [(ngModel)]="menu.precio" name="precio" required #precio="ngModel" placeholder="Ingrese Valor en Numeros">
+          <div class="alert alert-danger" *ngIf="precio.invalid && (precio.dirty || precio.touhed)" >
+            <div *ngIf="precio.errors.required">
+              Precio Obligatorio
+            </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" role ="button" [disabled]="!menuForm.valid" (click)='create()' *ngIf="!menu.id else elseBlock">Crear</button>
+          <ng-template #elseBlock>
+            <button class="btn btn-primary" role ="button" [disabled]="!menuForm.valid"  (click)='update()'>Guardar</button>
+          </ng-template>
+          <input type="button" class="btn btn-primary"  onclick="history.back()" name="Regresar" value="Volver Atrás">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

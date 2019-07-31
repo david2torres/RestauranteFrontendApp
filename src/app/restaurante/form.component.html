@@ -1,0 +1,58 @@
+<div class="card bg-dark text-white">
+  <div class="card-header">{{ titulo }}</div>
+  <div class="card-body">
+
+    <form #restauranteForm="ngForm">
+      <div class="form-group row">
+        <label for="tipoRestaurante" class="col-form-label col-sm-2">Tipo Restaurante</label>
+        <div class="col-sm-6">
+          <select id="tipoRestaurante" [(ngModel)]="restaurante.tipoRestaurante" class="col-form-label col-sm-12"  name="tipoRestaurante" required #tipoRestaurante="ngModel">
+            <option>Carnes Rojas y Aves</option>
+            <option>Pescados y Mariscos</option>
+            <option>Vegano</option>
+            <option>Vegetariano</option>
+          </select>
+          <div class="alert alert-danger" *ngIf="tipoRestaurante.invalid && (tipoRestaurante.dirty || tipoRestaurante.touhed)" >
+            <div *ngIf="tipoRestaurante.errors.required">
+              Tipo Restaurante Obligatorio
+            </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="razonSocial" class="col-form-label col-sm-2">Razon Social</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="restaurante.razonSocial" name="razonSocial"  required #razonSocial="ngModel" placeholder="Razon Social">
+          <div class="alert alert-danger" *ngIf="razonSocial.invalid && (razonSocial.dirty || razonSocial.touhed)">
+            <div *ngIf="razonSocial.errors.required">
+              Razon Social Obligatorio
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="nombreComercial" class="col-form-label col-sm-2">Nombre Comercial</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="restaurante.nombreComercial" name="nombreComercial" required #nombreComercial="ngModel" placeholder="Nombre Comercial">
+          <div class="alert alert-danger" *ngIf="nombreComercial.invalid && (nombreComercial.dirty || nombreComercial.touhed)">
+            <div *ngIf="nombreComercial.errors.required">
+              Nombre Comercial Obligatorio
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" role ="button" [disabled]="!restauranteForm.valid" (click)='create()' *ngIf="!restaurante.id else elseBlock">Crear</button>
+          <ng-template #elseBlock>
+          <button class="btn btn-primary" role ="button" [disabled]="!restauranteForm.valid" (click)='update()'>Guardar</button>
+          </ng-template>
+          <input type="button" class="btn btn-primary"  onclick="history.back()" name="Regresar" value="Volver Atrás">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
